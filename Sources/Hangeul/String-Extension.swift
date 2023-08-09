@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+
+extension String{
+    var length: Int {
+        self.utf16.count
+    }
+    
+    static func emptyString() -> String{
+        ""
+    }
+}
