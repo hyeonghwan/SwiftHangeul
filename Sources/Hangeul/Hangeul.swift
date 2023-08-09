@@ -38,7 +38,7 @@ class Hangule{
             return
         }
         guard let char = ch else { return }
-        var ch = Character(char)
+        let ch = Character(char)
         
         if let value = ch.unicodeScalars.first?.value{
             // 문자가 영어거나 letter가 아닐경우 문자열에 추가 후

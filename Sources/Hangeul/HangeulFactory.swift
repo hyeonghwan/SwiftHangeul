@@ -232,9 +232,4 @@ extension HangeulFactory{
     }
 }
 
-extension String{
-    
-    static func emptyString() -> String {
-        return ""
-    }
-}
+
