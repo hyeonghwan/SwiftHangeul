@@ -403,7 +403,6 @@ extension HanguleState{
         var tempfinal_consonant = ""
         tempfinal_consonant += String(종성_첫번째_받침 ?? Character("\0"))
         tempfinal_consonant += String(ch)
-        print("tempfinal_consonant :\(tempfinal_consonant)")
         
         let tempFinalConsonantOneValue = HangeulFactory.checkIsDoublejongSung(tempfinal_consonant)
         

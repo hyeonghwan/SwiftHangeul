@@ -13,6 +13,8 @@ class HangeulFactory{
     static let base_init_soundCode: Int = 0x1100 // ㄱ
     static let base_vowel_code: Int = 0x1161 // ㅏ
     
+    static let last_code: Int = 0xD7A3
+    
     static let initial_sounds: String = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"
     
     static let middle_vowels: [String] = [ "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ",
@@ -111,6 +113,57 @@ class HangeulFactory{
         guard let scalar: Unicode.Scalar = Unicode.Scalar(completeChar) else {return nil}
         return Character(scalar)
         
+    }
+    
+    /// '한' -> ㅎ,ㅏ,ㄴ 글자 분해
+    /// - Parameter 코드: '한' 의 유니코드
+    /// - Returns: ㅎ,ㅏ,ㄴ
+    /// - 글자코드 를 (21 * 28) 로 나눈 몫은 초성
+    /// - 글자코드를 (21 * 28)로 나눈 나머지를 , 28로 나눈 몫은 중성
+    /// - 글자코드값을 28로 나눈 나머지는 종성
+    public static func 글자_분해_함수(input string: String) -> [Character]{
+    
+        var result: [Character] = []
+        for scalar in string.unicodeScalars{
+            let 코드 = Int(scalar.value)
+            
+            if !((코드 >= base_code) && (코드 <= last_code)){
+                result.append(Character(String(scalar)))
+            }else{
+                let 인덱스_코드 = 코드 - base_code
+                let 초성_코드 = 인덱스_코드 / (21 * 28)
+                let 중성_코드 = (인덱스_코드 % (21 * 28)) / 28
+                let 종성_코드 = 인덱스_코드 % 28
+
+                if let 초성 = getSingleLetter(초성_코드){
+                    result.append(초성)
+                }
+
+                if let 중성 = getSingleVowel(중성_코드){
+                    result.append(중성)
+                }
+
+                if let 종성 = final_consonants[종성_코드]{
+                    result.append(Character(종성))
+                }
+            }
+        }
+        
+        return result
+    }
+    // 초성 중성 종성으로 한글자 만들기
+    public static func getComplteCode(_ init_sound: Int ,_ vowel: Int,_ final: Int) -> Int{
+        
+        var tempFinalConsonant: Int = 0
+        if final >= 0{
+            tempFinalConsonant = final
+        }
+        let 중성개수 = middle_vowels.count
+        let 종성개수 = final_consonants.count
+        let base_code = HangeulFactory.base_code
+        
+        let completeChar: Int = base_code + init_sound * 중성개수 * 종성개수 + vowel * 종성개수 + tempFinalConsonant
+        return completeChar   
     }
 
     
