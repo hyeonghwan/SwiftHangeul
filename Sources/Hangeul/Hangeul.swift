@@ -12,29 +12,35 @@ import Foundation
 
 class Hangule{
     
-    private var hangeulState: HanguleState
+    private var state: HangeulState
     
     private var source: String
     
     public init(){
-        self.hangeulState = HanguleState()
+        self.state = HangeulState()
         self.source = ""
     }
     
-    //결과 문자열 얻기
+    
+    
+    /// 결과 문자열 얻기
+    public var total: String {
+        source
+    }
+    
     public func getTotalString() -> String{
         return source
     }
     
     // 글자 입력 상태 초기화
     private func resetState() {
-        hangeulState.hangule_init()
+        state.stateInit()
     }
     
-    public func inputLetter(_ ch: String?){
+    public func insert(_ ch: String?){
         // '\b' remove Key
         if (ch == nil){
-            removeKeyPressed()
+            removeAction()
             return
         }
         guard let char = ch else { return }
@@ -45,12 +51,12 @@ class Hangule{
             // 초성 을 기대하는 상태로 초기화
             if (((value >= 97) && (value <= 122)) || ((value >= 65) && (value <= 90))) || (!ch.isLetter){
                 source += String(ch)
-                hangeulState.hangule_init()
+                state.stateInit()
                 return
             }
         }
         
-        switch hangeulState.state{
+        switch state.state{
         case .초성_Turn:
             inputInitSoundProc(ch: ch)
             break
@@ -68,7 +74,7 @@ class Hangule{
     public func inputLetter(_ ch: Character?){
         // '\b' remove Key
         if (ch == nil){
-            removeKeyPressed()
+            removeAction()
             return
         }
         guard let ch = ch else { return }
@@ -78,12 +84,12 @@ class Hangule{
             // 초성 을 기대하는 상태로 초기화
             if (((value >= 97) && (value <= 122)) || ((value >= 65) && (value <= 90))) || (!ch.isLetter){
                 source += String(ch)
-                hangeulState.hangule_init()
+                state.stateInit()
                 return
             }
         }
         
-        switch hangeulState.state{
+        switch state.state{
         case .초성_Turn:
             inputInitSoundProc(ch: ch)
             break
@@ -104,76 +110,76 @@ class Hangule{
 //    }
     
     private func inputInitSoundProc(ch: Character){
-        if (!hangeulState.inputAtInitSound(ref: &source, ch: ch)){
+        if (!state.inputAtInitSound(ref: &source, ch: ch)){
             inputLetter(ch)
         }
     }
     
     private func inputVowelProc(ch: Character){
-        if (hangeulState.existVowel() == false){
-            if hangeulState.inputFirstVowel(ref: &source, ch: ch) == false{
+        if (state.existVowel() == false){
+            if state.inputFirstVowel(ref: &source, ch: ch) == false{
                 inputLetter(ch)
             }
         }else{
-            if hangeulState.inputSecondVowel(ref: &source, ch: ch) == false{
+            if state.inputSecondVowel(ref: &source, ch: ch) == false{
                 inputLetter(ch)
             }
         }
     }
     
     private func inputFinalConsonantProc(ch: Character){
-        if hangeulState.첫번째_종성_존재_여부_함수() == false{
-            if hangeulState.inputFirstFinalConsonant(ref: &source, ch: ch) == false{
+        if state.첫번째_종성_존재_여부_함수() == false{
+            if state.inputFirstFinalConsonant(ref: &source, ch: ch) == false{
                 inputLetter(ch)
             }
         }else{
-            if hangeulState.inputSecondFinalConsonant(ref: &source, ch: ch) == false{
+            if state.inputSecondFinalConsonant(ref: &source, ch: ch) == false{
                 inputLetter(ch)
             }
         }
     }
     
-    private func removeKeyPressed(){
+    private func removeAction(){
         if source.length <= 0 {
             return
         }
         
-        if hangeulState.state == .초성_Turn || hangeulState.isInitSound(){
+        if state.state == .초성_Turn || state.isInitSound(){
             
-            hangeulState.setStateInitSound()
+            state.setStateInitSound()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
             return
         }
         
-        if hangeulState.isSingleVowel(){
-            hangeulState.setStateVowel()
+        if state.isSingleVowel(){
+            state.setStateVowel()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
-            source += String(hangeulState.초성코드_글자로_변환_함수())
+            source += String(state.초성코드_글자로_변환_함수())
             return
         }
         
-        if hangeulState.isDoubleVowel(){
+        if state.isDoubleVowel(){
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
             
-            hangeulState.마지막_중성_모음_지우기_함수()
-            source += String(hangeulState.getCompleteChar())
+            state.마지막_중성_모음_지우기_함수()
+            source += String(state.getCompleteChar())
             return
         }
         
-        if hangeulState.isSingleFinalConsonant(){
-            hangeulState.종성_지우기_함수()
+        if state.isSingleFinalConsonant(){
+            state.종성_지우기_함수()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
-            source += String(hangeulState.getCompleteChar())
+            source += String(state.getCompleteChar())
             return
-        }else if hangeulState.isFull(){
-            hangeulState.마지막_종성_지우기_함수()
+        }else if state.isFull(){
+            state.마지막_종성_지우기_함수()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
-            source += String(hangeulState.getCompleteChar())
+            source += String(state.getCompleteChar())
         }
     }
 }

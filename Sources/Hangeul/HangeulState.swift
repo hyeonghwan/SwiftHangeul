@@ -14,7 +14,7 @@ enum 한글입력상태{
     case none
 }
 
-class HanguleState{
+class HangeulState{
     var 중성_모음_초기_상태 = Character("\0") // 초성 초기 문자
     var 종성_초기_상태 = Character("\0") // 종성 초기 문자
     
@@ -50,7 +50,7 @@ class HanguleState{
         
     }
 
-    func hangule_init(){
+    func stateInit(){
         state = .초성_Turn
         초성_코드 = -1;
         
@@ -67,7 +67,7 @@ class HanguleState{
 }
 
 // MARK: - About Hangul Get character method
-extension HanguleState{
+extension HangeulState{
     
     
     /// 현재 HGState의 Hangul 문자 구하는 method
@@ -240,7 +240,7 @@ extension HanguleState{
                 print("\(#file) \(#function) \(#line)")
                 fatalError("inputFirstVowel character optional unwrapping error ouccr")
             }
-            hangule_init();
+            stateInit();
         }else{
             // 초성이 있을 때는 중성을 설정합니다.
             setVowel(ch)
@@ -332,14 +332,14 @@ extension HanguleState{
             // 입력 인자로 받은 문자가 모음일 때는 초기화를 하고
             // false를 반환하여 글자상태를 초성_Turn으로 초기화
             if HangeulFactory.getVowelCode(ch) >= 0 {
-                hangule_init()
+                stateInit()
                 return false
             }
         
             // 종성으로 쓸 수 없는 자음이 왔을 때도 초기화를 합니다.
             // Ex) ㄲ ㄸ ㅉ
             if HangeulFactory.getInitSoundCode(ch) >= 0{
-                hangule_init()
+                stateInit()
                 이중_종성_가능여부 = false
                 종성_코드 = 0
                 return false
@@ -380,7 +380,7 @@ extension HanguleState{
             // 그렇지 않으면 입력 인자로 받은 문자가 초성인지 확인하여
             // 초성이면 초기 상태로 전이합니다.
             if HangeulFactory.getInitSoundCode(ch) >= 0 {
-                hangule_init()
+                stateInit()
             }
             else{
                 // 그렇지 않으면 마지막 문자의 종성을 새로운 초성으로 설정합니다.
@@ -526,7 +526,7 @@ extension HanguleState{
 
 
 // MARK: - 상태 전이 메서드 extension
-extension HanguleState{
+extension HangeulState{
     
     ///  초성 상태로 전이하는 메서드
     func setStateInitSound(){

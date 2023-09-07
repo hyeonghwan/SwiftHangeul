@@ -14,27 +14,52 @@ final class HangeulTests: XCTestCase {
     //UNIcodeScalar 와 UTF8
     func testUnicode(){
         
-        let 글자 = "한글놀이"
-        for i in 글자.unicodeScalars{
-            print(i.value)
-        }
-        
-        for k in 글자.utf8{
-            print(k)
-        }
+        print(HangeulFactory.initial_sounds.map{ $0.unicodeScalars.first! })
+        print(HangeulFactory.middle_vowels.map{ $0.unicodeScalars.first! })
+        print(HangeulFactory.final_consonants.compactMap{ $0?.unicodeScalars.first! })
         
         let arr = HangeulFactory.글자_분해_함수(input: "그러면 이것도 분해 가능 하냐?")
         let arr1 = HangeulFactory.글자_분해_함수(input: "한영!")
-        let one = arr.map{ String($0)}
+        
+        print("arr : \(arr)")
+        
+        let one = arr.map{ String($0) }
         let two = arr1.map{ String($0) }
-        let oneResult = ["ㄱ","ㅡ","ㄹ","ㅓ","ㅁ","ㅕ","ㄴ"," ",
+        
+        let one_pair: [String] = ["ㄱ","ㅡ","ㄹ","ㅓ","ㅁ","ㅕ","ㄴ"," ",
                          "ㅇ","ㅣ","ㄱ","ㅓ","ㅅ","ㄷ", "ㅗ", " ",
                          "ㅂ", "ㅜ", "ㄴ", "ㅎ", "ㅐ", " ",
                          "ㄱ", "ㅏ","ㄴ","ㅡ","ㅇ"," ",
                          "ㅎ", "ㅏ", "ㄴ", "ㅑ", "?"]
-        let twoResult = ["ㅎ","ㅏ","ㄴ","ㅇ","ㅕ","ㅇ","!"]
-        XCTAssertEqual(one, oneResult,"fail One 분해 실패")
-        XCTAssertEqual(two, twoResult, "fail two 분해 실패")
+        let two_pair: [String] = ["ㅎ","ㅏ","ㄴ","ㅇ","ㅕ","ㅇ","!"]
+        
+        let hangeul1 = Hangule()
+        let hangeul2 = Hangule()
+        let hangeul3 = Hangule()
+        let hangeul4 = Hangule()
+        
+        one.forEach { str in
+            hangeul1.insert(str)
+        }
+        let result_one = hangeul1.getTotalString()
+        
+        two.forEach { str in
+            hangeul2.insert(str)
+        }
+        let result_two = hangeul1.getTotalString()
+        
+        one_pair.forEach { str in
+            hangeul3.insert(str)
+        }
+        let result_one_pair = hangeul3.getTotalString()
+        
+        two_pair.forEach { str in
+            hangeul4.insert(str)
+        }
+        let result_two_pair = hangeul4.getTotalString()
+
+        XCTAssertEqual(result_one, result_one_pair,"fail One 분해 실패")
+        XCTAssertEqual(result_two, result_two_pair, "fail two 분해 실패")
     }
 
     func makeHangeul(choSung: Character, jungSung: Character, jongSung: Character )
@@ -92,15 +117,15 @@ final class HangeulTests: XCTestCase {
         
         //when
         string1.forEach{ char in
-            hangeul.inputLetter(char)
+            hangeul.insert(char)
             print(hangeul.getTotalString())
         }
         string2.forEach { char in
-            hangeul.inputLetter(char)
+            hangeul.insert(char)
             print(hangeul.getTotalString())
         }
         string3.forEach { char in
-            hangeul.inputLetter(char)
+            hangeul.insert(char)
             print(hangeul.getTotalString())
         }
         
@@ -109,3 +134,4 @@ final class HangeulTests: XCTestCase {
         XCTAssertEqual("한글 한 글하글", result, "한글입력 \(result) 테스트 실패")
     }
 }
+

@@ -15,28 +15,51 @@ class HangeulFactory{
     
     static let last_code: Int = 0xD7A3
     
-    static let initial_sounds: String = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"
     
-    static let middle_vowels: [String] = [ "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ",
-                                        "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ",
-                                        "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ" ]
+    
+    
+    static let initial_sounds: [String] = ["\u{1100}","\u{1101}","\u{1102}","\u{1103}","\u{1104}",
+                                           "\u{1105}","\u{1106}","\u{1107}","\u{1108}","\u{1109}",
+                                           "\u{110A}","\u{110B}","\u{110C}","\u{110D}","\u{110E}",
+                                           "\u{110F}","\u{1110}","\u{1111}","\u{1112}"]
+    
+    static let middle_vowels: [String] = [ "\u{1161}", "\u{1162}", "\u{1163}", "\u{1164}",
+                                           "\u{1165}", "\u{1166}", "\u{1167}", "\u{1168}",
+                                           "\u{1169}", "\u{116A}", "\u{116B}", "\u{116C}",
+                                           "\u{116D}", "\u{116E}", "\u{116F}", "\u{1170}",
+                                           "\u{1171}", "\u{1172}", "\u{1173}", "\u{1174}", "\u{1175}" ]
     
     static let final_consonants: [String?] = [nil, "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ",
                                        "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ",
                                        "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ" ]
     
-    init(){
-        let k = HangeulFactory.getSingleLetter(HangeulFactory.getInitSoundCode(Character("ㄱ")))
-        print("kfgagd : \(k)")
+    static let 글자호환맵: [String : String] = [:]
+    
+//    init(){
+//        let k = HangeulFactory.getSingleLetter(HangeulFactory.getInitSoundCode(Character("ㄱ")))
+//        print("kfgagd : \(k)")
+//    }
+    
+    
+    
+    /// 호환자모 한글을 -> 한글자모로 바꾸는 함수 입니다.
+    /// - Parameter char: \u3131 : "ㄱ"
+    /// - Returns:\u1100 "ㄱ"
+    public static func 한글호환자모_한글자모로_바꾸기(char: String) -> String {
+        return ""
     }
     
     
     // 초성을 입력받아서 몇번째 글자인지 배열의 인덱스로 계산
     public static func getInitSoundCode(_ ch: Character) -> Int{
-        
-        if let index: String.Index = initial_sounds.firstIndex(of: ch){
-            return initial_sounds.distance(from: initial_sounds.startIndex, to: index)
+//        if let index: String.Index = initial_sounds.firstIndex(of: ){
+//            return initial_sounds.distance(from: initial_sounds.startIndex, to: index)
+//        }
+    
+        if let index = initial_sounds.firstIndex(of: String(ch)) {
+            return index
         }
+        
         return -1
     }
     
@@ -44,7 +67,7 @@ class HangeulFactory{
     public static func getVowelCode(_ str: String) -> Int{
         let cnt: Int = middle_vowels.count
         
-        for i in 0..<cnt{
+        for i in 0..<cnt {
             if middle_vowels[i] == str{
                 return i
             }
