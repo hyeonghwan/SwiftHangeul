@@ -10,7 +10,7 @@
 import Foundation
 
 
-class Hangule{
+public final class Hangule {
     
     private var state: HangeulState
     
@@ -20,8 +20,6 @@ class Hangule{
         self.state = HangeulState()
         self.source = ""
     }
-    
-    
     
     /// 결과 문자열 얻기
     public var total: String {
@@ -56,7 +54,7 @@ class Hangule{
             }
         }
         
-        switch state.state{
+        switch state.state {
         case .초성_Turn:
             inputInitSoundProc(ch: ch)
             break
@@ -73,7 +71,7 @@ class Hangule{
     
     public func inputLetter(_ ch: Character?){
         // '\b' remove Key
-        if (ch == nil){
+        if (ch == nil) {
             removeAction()
             return
         }

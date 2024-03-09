@@ -7,27 +7,27 @@
 
 import Foundation
 
-enum 한글입력상태{
+internal enum 한글입력상태 {
     case 초성_Turn
     case 중성모음_Turn
     case 종성_Turn
     case none
 }
 
-class HangeulState{
+internal final class HangeulState {
     var 중성_모음_초기_상태 = Character("\0") // 초성 초기 문자
-    var 종성_초기_상태 = Character("\0") // 종성 초기 문자
+    var 종성_초기_상태 = Character("\0")     // 종성 초기 문자
     
     var 초성_코드: Int                 //초성
     
-    var 중성_모음_코드: Int             //중성(모음)
-    var 중성_첫번째_모음: Character         //첫 모음
-    var 이중_모음_가능여부: Bool         //이중 모음이 가능 여부
+    var 중성_모음_코드: Int             // 중성(모음)
+    var 중성_첫번째_모음: Character      //  첫 모음
+    var 이중_모음_가능여부: Bool         //  이중 모음이 가능 여부
     
-    var 종성_코드: Int            //종성
-    var 종성_첫번째_받침: Character? //종성의 첫 받침
-    var 종성_마지막_받침: Character  //종성의 마지막 받침(이중 받침일 때 의미가 있음)
-    var 이중_종성_가능여부:  Bool  //이중 받침 가능 여부
+    var 종성_코드: Int             // 종성
+    var 종성_첫번째_받침: Character? // 종성의 첫 받침
+    var 종성_마지막_받침: Character  // 종성의 마지막 받침(이중 받침일 때 의미가 있음)
+    var 이중_종성_가능여부:  Bool    // 이중 받침 가능 여부
 
     var state: 한글입력상태 = .none
 
@@ -73,7 +73,7 @@ extension HangeulState{
     /// 현재 HGState의 Hangul 문자 구하는 method
     /// - Returns: complted Hangul
     func getCompleteChar() -> Character{
-        if let completeChar = HangeulFactory.getComplteLetter(초성_코드, 중성_모음_코드, 종성_코드) {
+        if let completeChar = HangeulFactory.shared.getComplteLetter(초성_코드, 중성_모음_코드, 종성_코드) {
             return completeChar
         }else{
             print("\(#file) \(#function) \(#line)")
@@ -89,7 +89,7 @@ extension HangeulState{
     /// 2. HangeulFactory의 메서드 활용 , 모음이 이중모음 구성이 가능한지 체크
     /// 3. 종성을 설정하지 않았어야 함
     func isDoubleVowel() -> Bool{
-        let checkDoubleVowel = HangeulFactory.enable_이중모음(중성_모음_코드)
+        let checkDoubleVowel = HangeulFactory.shared.enable_이중모음(중성_모음_코드)
         return 이중_모음_가능여부 && (checkDoubleVowel == false) && (existFirstFinalConsonant() == false)
     }
     
@@ -122,7 +122,7 @@ extension HangeulState{
     func isSingleVowel() -> Bool{
         
         // 먼저 첫 모음이 vowel이 아니면 단일 모음이 아니다.
-        if 중성_모음_코드 != HangeulFactory.getVowelCode(중성_첫번째_모음){
+        if 중성_모음_코드 != HangeulFactory.shared.getVowelCode(중성_첫번째_모음){
            return false
         }
         // 만약 모음이 존재하면서 (모음을 기대하는 상태이거나) || (종성을 기대하는 상태)인데 종성이 없는 상태이면 단일 모음이다.
@@ -171,7 +171,7 @@ extension HangeulState{
     /// - Returns: Bool
     ///  이중 종성이 가능한 자음은 ㄱ, ㄴ, ㄹ, ㅂ 입니다.
     func enableDoubleFinalConsonant() -> Bool{
-        return HangeulFactory.enable_이중종성(종성_코드)
+        return HangeulFactory.shared.enable_이중종성(종성_코드)
     }
 
     
@@ -179,7 +179,7 @@ extension HangeulState{
     /// - Parameter ch: 입력 문자
     func setVowel(_ ch: Character){
         //hangulMaker의 정적 메소드를 이용하여 이중 모음이 가능한지 확인
-        if HangeulFactory.isDoubleVowel(ch){
+        if HangeulFactory.shared.isDoubleVowel(ch){
             // 가능하면 vowelPossible을 true로 설정하고 현재 상태를 모음을 기대하는 상태로 설정합니다.
             이중_모음_가능여부 = true
             state = .중성모음_Turn
@@ -202,12 +202,12 @@ extension HangeulState{
         //먼저 다음 상태는 중성을 기대하는 상태로 전이
         state = .중성모음_Turn
         
-        초성_코드 = HangeulFactory.getInitSoundCode(ch)
+        초성_코드 = HangeulFactory.shared.getInitSoundCode(ch)
         
-        if 초성_코드 >= 0{
+        if 초성_코드 >= 0 {
             //초성 문자가 맞으면 초성 코드 값은 0보다 크거나 같다.
             // 이 때 초성으로만 구성한 한글을 기존 문자열에 더한다.
-            if let character = HangeulFactory.getSingleLetter(초성_코드){
+            if let character = HangeulFactory.shared.getSingleLetter(초성_코드){
                 source += String(character)
                 return true
             }else{
@@ -227,14 +227,14 @@ extension HangeulState{
     /// - Returns: 문자열에 입력한 문자의 삽입 여부 Bool
     func inputFirstVowel(ref source: inout String, ch: Character) -> Bool{
         // 먼저 문자의 중성 코드 값을 구한다.
-        중성_모음_코드 = HangeulFactory.getVowelCode(ch)
+        중성_모음_코드 = HangeulFactory.shared.getVowelCode(ch)
         
         // 만약 중성 코드가 아니면 상태를 초기 상태로 전이합니다.
         if (중성_모음_코드 < 0){ state = .초성_Turn; return false}
         
         // 초성이 없을 때는 모음 하나로 구성한 한글을 문자열에 추가하고 Init 메서드(글자 상태 초기화 -> 초성터_Turn)를 호출합니다.
         if (초성_코드 < 0){
-            if let character = HangeulFactory.getSingleVowel(HangeulFactory.getVowelCode(ch)){
+            if let character = HangeulFactory.shared.getSingleVowel(HangeulFactory.shared.getVowelCode(ch)){
                 source += String(character)
             }else{
                 print("\(#file) \(#function) \(#line)")
@@ -268,15 +268,15 @@ extension HangeulState{
     func inputSecondVowel(ref source: inout String , ch : Character) -> Bool{
         
         // 현재 첫번째 모음 문자와 입력 인자로 받은 문자로 구성한 문자열을 만듭니다.
-        var 빈_모음 = String.emptyString()
+        var 빈_모음 = String.emptyStr
         빈_모음 += 중성_첫번째_모음.description
         빈_모음 += ch.description
         
         // 이중모음으로 변환
-        let 이중_모음 = HangeulFactory.checkIsDoubleVowel(빈_모음)
+        let 이중_모음 = HangeulFactory.shared.checkIsDoubleVowel(빈_모음)
         
         // 구성한 문자열로 중성 코드 값을 구합니다.
-        let 이중_모음코드: Int = HangeulFactory.getVowelCode(이중_모음)
+        let 이중_모음코드: Int = HangeulFactory.shared.getVowelCode(이중_모음)
         
         // 중성 코드 값이 0 보다 크거나 같으면 유효한 모음입니다.
         // 이중 모음을 구성한 문자열을 모음으로 설정합니다.
@@ -312,7 +312,7 @@ extension HangeulState{
     func inputFirstFinalConsonant(ref source: inout String , ch: Character?) -> Bool{
         //먼저 입력인자로 받은 문자를 종성 코드로 변환합니다.
         
-        종성_코드 = HangeulFactory.getFinalConsonantCode(ch)
+        종성_코드 = HangeulFactory.shared.getFinalConsonantCode(ch)
         
         
         if 종성_코드 > 0 {
@@ -331,14 +331,14 @@ extension HangeulState{
             
             // 입력 인자로 받은 문자가 모음일 때는 초기화를 하고
             // false를 반환하여 글자상태를 초성_Turn으로 초기화
-            if HangeulFactory.getVowelCode(ch) >= 0 {
+            if HangeulFactory.shared.getVowelCode(ch) >= 0 {
                 stateInit()
                 return false
             }
         
             // 종성으로 쓸 수 없는 자음이 왔을 때도 초기화를 합니다.
             // Ex) ㄲ ㄸ ㅉ
-            if HangeulFactory.getInitSoundCode(ch) >= 0{
+            if HangeulFactory.shared.getInitSoundCode(ch) >= 0{
                 stateInit()
                 이중_종성_가능여부 = false
                 종성_코드 = 0
@@ -379,7 +379,7 @@ extension HangeulState{
             
             // 그렇지 않으면 입력 인자로 받은 문자가 초성인지 확인하여
             // 초성이면 초기 상태로 전이합니다.
-            if HangeulFactory.getInitSoundCode(ch) >= 0 {
+            if HangeulFactory.shared.getInitSoundCode(ch) >= 0 {
                 stateInit()
             }
             else{
@@ -404,10 +404,10 @@ extension HangeulState{
         tempfinal_consonant += String(종성_첫번째_받침 ?? Character("\0"))
         tempfinal_consonant += String(ch)
         
-        let tempFinalConsonantOneValue = HangeulFactory.checkIsDoublejongSung(tempfinal_consonant)
+        let tempFinalConsonantOneValue = HangeulFactory.shared.checkIsDoublejongSung(tempfinal_consonant)
         
         //   KoreanCharMaker의 정적 메서드 getFinalConsonantCode로 종성 코드를 구합니다.
-        let temp: Int = HangeulFactory.getFinalConsonantCode(tempFinalConsonantOneValue)
+        let temp: Int = HangeulFactory.shared.getFinalConsonantCode(tempFinalConsonantOneValue)
         
         // 종성 코드가 0보다 크면 이중 받침입니다.
         // 최종 종성을 입력 받은 문자로 설정하고 종성을 임시로 구성한 문자열로 설정합니다.
@@ -440,12 +440,12 @@ extension HangeulState{
             // 마지막 문자를 마지막 받침만 없는 문자로 변경
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             source = String(source[..<index])
-            종성_코드 = HangeulFactory.getFinalConsonantCode(종성_첫번째_받침)
+            종성_코드 = HangeulFactory.shared.getFinalConsonantCode(종성_첫번째_받침)
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
             // 초성 코드 구하기
-            초성_코드 = HangeulFactory.getInitSoundCode(종성_마지막_받침)
+            초성_코드 = HangeulFactory.shared.getInitSoundCode(종성_마지막_받침)
             
         }else{
             // 그렇지 않다면 종성 문자를 얻어와서
@@ -469,11 +469,11 @@ extension HangeulState{
             source += String(compltedString)
             
             // 그리고 종성으로 초성 코드를 구한다.
-            초성_코드 = HangeulFactory.getInitSoundCode(tempInit_sound)
+            초성_코드 = HangeulFactory.shared.getInitSoundCode(tempInit_sound)
         }
         // 받침으로 만든 초성 코드로 초성 글자를 만들어
         // 원본 문자열에 추가하고 상태를 전이합니다.
-        if let value = HangeulFactory.getSingleLetter(초성_코드){
+        if let value = HangeulFactory.shared.getSingleLetter(초성_코드){
             source += String(value)
             setStateVowel()
         }else{
@@ -496,7 +496,7 @@ extension HangeulState{
         // 상태를 모음을 기대하는 상태로 전이합니다
         // 모음 코드를 구하여 설정합니다.
         state = .중성모음_Turn
-        중성_모음_코드 = HangeulFactory.getVowelCode(중성_첫번째_모음)
+        중성_모음_코드 = HangeulFactory.shared.getVowelCode(중성_첫번째_모음)
     }
 
     
@@ -505,7 +505,7 @@ extension HangeulState{
     func 마지막_종성_지우기_함수(){
         state = .종성_Turn
         종성_마지막_받침 = 종성_초기_상태
-        종성_코드 = HangeulFactory.getFinalConsonantCode(종성_첫번째_받침)
+        종성_코드 = HangeulFactory.shared.getFinalConsonantCode(종성_첫번째_받침)
         이중_종성_가능여부 = true
     }
     
@@ -513,7 +513,7 @@ extension HangeulState{
     /// 초성으로 한 글자를 구하는 메소드
     /// - Returns: 한 글자
     func 초성코드_글자로_변환_함수() -> Character{
-        return HangeulFactory.getSingleLetter(초성_코드) ?? Character("\0")
+        return HangeulFactory.shared.getSingleLetter(초성_코드) ?? Character("\0")
     }
     
     ///  첫 종성이 있는지 확인하는 메서드
@@ -526,7 +526,7 @@ extension HangeulState{
 
 
 // MARK: - 상태 전이 메서드 extension
-extension HangeulState{
+extension HangeulState {
     
     ///  초성 상태로 전이하는 메서드
     func setStateInitSound(){
