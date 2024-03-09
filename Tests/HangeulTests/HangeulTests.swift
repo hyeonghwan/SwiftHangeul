@@ -3,23 +3,15 @@ import XCTest
 
 final class HangeulTests: XCTestCase {
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
     
     //UNIcodeScalar 와 UTF8
     func testUnicode(){
-        
-        print(HangeulFactory.initial_sounds.map{ $0.unicodeScalars.first! })
-        print(HangeulFactory.middle_vowels.map{ $0.unicodeScalars.first! })
-        print(HangeulFactory.final_consonants.compactMap{ $0?.unicodeScalars.first! })
-        
-        let arr = HangeulFactory.글자_분해_함수(input: "그러면 이것도 분해 가능 하냐?")
-        let arr1 = HangeulFactory.글자_분해_함수(input: "한영!")
+        let arr = HangeulFactory.shared.글자_분해_함수(input: "그러면 이것도 분해 가능 하냐?")
+        let arr1 = HangeulFactory.shared.글자_분해_함수(input: "한영!")
         
         print("arr : \(arr)")
         
@@ -46,7 +38,7 @@ final class HangeulTests: XCTestCase {
         two.forEach { str in
             hangeul2.insert(str)
         }
-        let result_two = hangeul1.getTotalString()
+        let result_two = hangeul2.getTotalString()
         
         one_pair.forEach { str in
             hangeul3.insert(str)
@@ -57,7 +49,7 @@ final class HangeulTests: XCTestCase {
             hangeul4.insert(str)
         }
         let result_two_pair = hangeul4.getTotalString()
-
+        
         XCTAssertEqual(result_one, result_one_pair,"fail One 분해 실패")
         XCTAssertEqual(result_two, result_two_pair, "fail two 분해 실패")
     }
@@ -65,15 +57,37 @@ final class HangeulTests: XCTestCase {
     func makeHangeul(choSung: Character, jungSung: Character, jongSung: Character )
     -> Character?{
         // given
-        let 초성코드 = HangeulFactory.getInitSoundCode(choSung)
-        let 중성코드 = HangeulFactory.getVowelCode(jungSung)
-        let 종성코드 = HangeulFactory.getFinalConsonantCode(jongSung)
+        let 초성코드 = HangeulFactory.shared.getInitSoundCode(choSung)
+        let 중성코드 = HangeulFactory.shared.getVowelCode(jungSung)
+        let 종성코드 = HangeulFactory.shared.getFinalConsonantCode(jongSung)
 
         // when
-        if let 글자 = HangeulFactory.getComplteLetter(초성코드, 중성코드, 종성코드){
+        if let 글자 = HangeulFactory.shared.getComplteLetter(초성코드, 중성코드, 종성코드){
             return 글자
         }
         return nil
+    }
+    
+    func test더블종성() {
+        //given
+        let 초: Character = "ㄱ"
+        let 중: Character = "ㅏ"
+        let 종: Character = "ㄴ"
+        let 종2: Character = "ㅅ"
+        
+        let arr: [String] = ["ㄱ", "ㅏ", "ㅂ" , "ㅅ"]
+        
+        let hanguel = Hangule()
+        arr.forEach { char in
+            hanguel.insert(char)
+        }
+        
+        XCTAssertEqual(hanguel.getTotalString(), "값")
+        
+        hanguel.inputLetter(nil)
+        hanguel.inputLetter("ㅅ")
+        
+        XCTAssertEqual(hanguel.getTotalString(), "값")
     }
     
     func testCase한글(){
