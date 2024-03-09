@@ -102,11 +102,6 @@ public final class Hangule {
         }
     }
     
-//    private func inputNoKorea(ch: Character){
-//        resetState()
-//        source += String(ch)
-//    }
-    
     private func inputInitSoundProc(ch: Character){
         if (!state.inputAtInitSound(ref: &source, ch: ch)){
             inputLetter(ch)

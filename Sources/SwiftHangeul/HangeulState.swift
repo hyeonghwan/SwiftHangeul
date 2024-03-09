@@ -81,7 +81,6 @@ extension HangeulState{
         }
     }
     
-    
     /// 이중 모음인지 확인하는 메소드
     /// - Returns: 이중모음의 Bool값
     /// 이중 모음인지 확인하기 위해서는

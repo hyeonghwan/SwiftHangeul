@@ -12,9 +12,6 @@ final class HangeulTests: XCTestCase {
     func testUnicode(){
         let arr = HangeulFactory.shared.글자_분해_함수(input: "그러면 이것도 분해 가능 하냐?")
         let arr1 = HangeulFactory.shared.글자_분해_함수(input: "한영!")
-        
-        print("arr : \(arr)")
-        
         let one = arr.map{ String($0) }
         let two = arr1.map{ String($0) }
         
@@ -70,11 +67,6 @@ final class HangeulTests: XCTestCase {
     
     func test더블종성() {
         //given
-        let 초: Character = "ㄱ"
-        let 중: Character = "ㅏ"
-        let 종: Character = "ㄴ"
-        let 종2: Character = "ㅅ"
-        
         let arr: [String] = ["ㄱ", "ㅏ", "ㅂ" , "ㅅ"]
         
         let hanguel = Hangule()
