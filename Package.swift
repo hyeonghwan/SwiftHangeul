@@ -21,6 +21,6 @@ let package = Package(
             name: "Hangeul"),
         .testTarget(
             name: "HangeulTests",
-            dependencies: ["Hangeul","RxSwfit"]),
+            dependencies: ["Hangeul"]),
     ]
 )
