@@ -13,7 +13,7 @@ extension String{
         self.utf16.count
     }
     
-    static func emptyString() -> String{
+    static var emptyStr: String {
         ""
     }
 }
