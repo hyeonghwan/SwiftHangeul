@@ -249,7 +249,7 @@ extension HangeulState{
             print("length: \(source.length)")
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
             print("source[..<index] : \(source[..<index])")
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             let compltedString = getCompleteChar()
             source += String(compltedString)
         }
@@ -284,7 +284,7 @@ extension HangeulState{
             
             // 원본 문자열의 맨 마지막 문자를 새로 형성한 문자열로 변경합니다.
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
@@ -313,12 +313,11 @@ extension HangeulState{
         
         종성_코드 = HangeulFactory.shared.getFinalConsonantCode(ch)
         
-        
         if 종성_코드 > 0 {
             // 종성 코드가 유효하면
             // 원본 문자열의 마지막 문자를 종성을 추가한 완성형 문자로 변경
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
@@ -416,7 +415,7 @@ extension HangeulState{
             
             // 원본 문자열의 마지막 문자열 완성한 문자로 변경합니다.
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
@@ -438,7 +437,7 @@ extension HangeulState{
             // 이중 받침으로 구성한 문자일 때는
             // 마지막 문자를 마지막 받침만 없는 문자로 변경
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             종성_코드 = HangeulFactory.shared.getFinalConsonantCode(종성_첫번째_받침)
             let compltedString = getCompleteChar()
             source += String(compltedString)
@@ -458,7 +457,7 @@ extension HangeulState{
             }
             
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
 //            종성_코드 = HangeulFactory.getFinalConsonantCode(종성_첫번째_받침)
             
             종성_지우기_함수()

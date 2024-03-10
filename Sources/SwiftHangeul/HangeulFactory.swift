@@ -170,7 +170,7 @@ public final class HangeulFactory {
     public func 글자_분해_함수(input string: String) -> [Character] {
     
         var result: [Character] = []
-        for scalar in string.unicodeScalars{
+        for scalar in string.unicodeScalars {
             let 코드 = Int(scalar.value)
             
             if !((코드 >= base_code) && (코드 <= last_code)){
