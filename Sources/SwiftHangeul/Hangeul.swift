@@ -1,11 +1,6 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-//
-//  Hangule.swift
-//
-//  Created by 박형환 on 2023/02/02.
-//
 
 import Foundation
 
@@ -122,11 +117,11 @@ public final class Hangule {
     
     private func inputFinalConsonantProc(ch: Character){
         if state.첫번째_종성_존재_여부_함수() == false{
-            if state.inputFirstFinalConsonant(ref: &source, ch: ch) == false{
+            if state.inputFirstFinalConsonant(ref: &source, ch: ch) == false {
                 inputLetter(ch)
             }
         }else{
-            if state.inputSecondFinalConsonant(ref: &source, ch: ch) == false{
+            if state.inputSecondFinalConsonant(ref: &source, ch: ch) == false {
                 inputLetter(ch)
             }
         }
@@ -141,21 +136,21 @@ public final class Hangule {
             
             state.setStateInitSound()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             return
         }
         
         if state.isSingleVowel(){
             state.setStateVowel()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             source += String(state.초성코드_글자로_변환_함수())
             return
         }
         
         if state.isDoubleVowel(){
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             
             state.마지막_중성_모음_지우기_함수()
             source += String(state.getCompleteChar())
@@ -165,13 +160,13 @@ public final class Hangule {
         if state.isSingleFinalConsonant(){
             state.종성_지우기_함수()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             source += String(state.getCompleteChar())
             return
         }else if state.isFull(){
             state.마지막_종성_지우기_함수()
             let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = String(source[..<index])
+            source = source[range: source.startIndex..<index]
             source += String(state.getCompleteChar())
         }
     }
