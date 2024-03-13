@@ -144,7 +144,7 @@ extension HangeulState {
     ///   - source: 문자열
     ///   - ch:  입력한 문자
     /// - Returns: 문자열에 입력한 문자의 삽입 여부 Bool
-    func inputAtInitSound(ref source: inout String, ch: Character) -> Bool {
+    func inputAtInitSound(ref source: inout [Character], ch: Character) -> Bool {
         
         //먼저 다음 상태는 중성을 기대하는 상태로 전이
         state = .중성모음_Turn
@@ -171,7 +171,7 @@ extension HangeulState {
     ///   - source: 결과 문자열
     ///   - ch: 입력한 문자
     /// - Returns: 문자열에 입력한 문자의 삽입 여부 Bool
-    func inputFirstVowel(ref source: inout String, ch: Character) -> Bool {
+    func inputFirstVowel(ref source: inout [Character], ch: Character) -> Bool {
         // 먼저 문자의 중성 코드 값을 구한다.
         중성_모음_코드 = HangeulFactory.shared.getVowelCode(ch)
         
@@ -191,8 +191,7 @@ extension HangeulState {
             setVowel(ch)
             
             // 그리고 마지막 문자를 중성을 설정한 한글로 변경합니다.
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             let compltedString = getCompleteChar()
             source += String(compltedString)
         }
@@ -207,7 +206,7 @@ extension HangeulState {
     ///   - source: 결과 문자열
     ///   - ch:  입력받은 문자
     /// - Returns: 성공여부
-    func inputSecondVowel(ref source: inout String , ch : Character) -> Bool {
+    func inputSecondVowel(ref source: inout [Character] , ch : Character) -> Bool {
         
         // 현재 첫번째 모음 문자와 입력 인자로 받은 문자로 구성한 문자열을 만듭니다.
         var 빈_모음 = String.emptyStr
@@ -226,8 +225,7 @@ extension HangeulState {
             중성_모음_코드 = 이중_모음코드
             
             // 원본 문자열의 맨 마지막 문자를 새로 형성한 문자열로 변경합니다.
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
@@ -251,15 +249,14 @@ extension HangeulState {
     ///   - source: 결과 문자열
     ///   - ch: 입력받은 문자
     /// - Returns: 성공 여부
-    func inputFirstFinalConsonant(ref source: inout String , ch: Character?) -> Bool {
+    func inputFirstFinalConsonant(ref source: inout [Character] , ch: Character?) -> Bool {
         //먼저 입력인자로 받은 문자를 종성 코드로 변환합니다.
         종성_코드 = HangeulFactory.shared.getFinalConsonantCode(ch)
         
         if 종성_코드 > 0 {
             // 종성 코드가 유효하면
             // 원본 문자열의 마지막 문자를 종성을 추가한 완성형 문자로 변경
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             let compltedString = getCompleteChar()
             source += String(compltedString)
             
@@ -308,7 +305,7 @@ extension HangeulState {
     ///   - source: 문자열
     ///   - ch: 입력받은 문자
     /// - Returns: 성공여부
-    func inputSecondFinalConsonant(ref source: inout String, ch: Character) -> Bool {
+    func inputSecondFinalConsonant(ref source: inout [Character], ch: Character) -> Bool {
         
         // 이중 받침이 가능하면 이중 모음을 설정하는 메서드를 호출합니다.
         if 이중_종성_가능여부{
@@ -423,7 +420,7 @@ extension HangeulState {
     ///   - source: 문자열
     ///   - ch: 입력받은 문자
     /// - Returns: 성공여부
-    private func setSecondFinalConsonant(ref source: inout String, ch: Character) -> Bool {
+    private func setSecondFinalConsonant(ref source: inout [Character], ch: Character) -> Bool {
         // 이중 받침을 추가하는 메서드를 호출하였기에 이중_종성_가능여부를 False 로 할당
         이중_종성_가능여부 = false
         
@@ -443,8 +440,7 @@ extension HangeulState {
             종성_코드 = temp
             
             // 원본 문자열의 마지막 문자열 완성한 문자로 변경합니다.
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             let compltedString = getCompleteChar()
             source += String(compltedString)
             return true
@@ -457,12 +453,11 @@ extension HangeulState {
     /// - Parameter source: 변경할 문자열
     ///  '않' ->  (입력: 'ㅏ') -> '안하'
     ///   '안'.  -> 입력('ㅏ'). -> 아나
-    private func lastFinalConsonantToInitSound(ref source: inout String) {
+    private func lastFinalConsonantToInitSound(ref source: inout [Character]) {
         if isFull() {
             // 이중 받침으로 구성한 문자일 때는
             // 마지막 문자를 마지막 받침만 없는 문자로 변경
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             종성_코드 = HangeulFactory.shared.getFinalConsonantCode(종성_첫번째_받침)
             let compltedString = getCompleteChar()
             source += String(compltedString)
@@ -481,9 +476,7 @@ extension HangeulState {
                 tempInit_sound = Character("\0")
             }
             
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
-            
+            source.removeLast()
             종성_지우기_함수()
             
             let compltedString = getCompleteChar()
@@ -493,6 +486,7 @@ extension HangeulState {
             // 그리고 종성으로 초성 코드를 구한다.
             초성_코드 = HangeulFactory.shared.getInitSoundCode(tempInit_sound)
         }
+        
         // 받침으로 만든 초성 코드로 초성 글자를 만들어
         // 원본 문자열에 추가하고 상태를 전이합니다.
         if let value = HangeulFactory.shared.getSingleLetter(초성_코드) {

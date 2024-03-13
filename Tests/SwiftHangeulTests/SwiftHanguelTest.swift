@@ -56,9 +56,8 @@ final class SwiftHangeulTests: XCTestCase {
     
     func testRemoveCase() {
         let value: String = "😇😇😇😇"
-    
         measure {
-            sut.input("\(value)")
+            sut.input("\(str)")
             print(sut.getTotoal())
         }
     }
