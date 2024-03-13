@@ -23,6 +23,17 @@ public final class SwiftHangeul {
         self.hanguelState = hanguelState
     }
     
+    public func input(char: Character?) {
+        if let char
+        {
+            hanguelState.inputLetter(char)
+        }
+        else
+        {
+            hanguelState.inputLetter(nil)
+        }
+    }
+    
     public func input(_ str: String?) {
         if let str
         {
@@ -37,9 +48,9 @@ public final class SwiftHangeul {
         }
     }
     
-    public func separate(input: String) -> [String] {
+    public func separate(input: String) -> [Character] {
         let array = factory.글자_분해_함수(input: input)
-        return array.map { String($0) }
+        return array.map { $0 }
     }
     
     public func backKey() {

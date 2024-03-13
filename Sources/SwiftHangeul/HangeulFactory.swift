@@ -127,7 +127,7 @@ public final class HangeulFactory {
     
     
     //자음 하나로 만들어진 한글 문자를 만드는 메서드
-    public func getSingleLetter(_ value: Int) -> Character?{
+    public func getSingleLetter(_ value: Int) -> Character? {
         if let scalar = Unicode.Scalar(base_init_soundCode + value) {
         
             return Character(scalar)
@@ -136,7 +136,7 @@ public final class HangeulFactory {
     }
     
     //모음 하나로 만들어진 한글 문자를 만드는 메서드
-    public func getSingleVowel(_ value: Int) -> Character?{
+    public func getSingleVowel(_ value: Int) -> Character? {
         if let scalar = Unicode.Scalar(base_vowel_code + value) {
             return Character(scalar)
         }
