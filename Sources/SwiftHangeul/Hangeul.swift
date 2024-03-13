@@ -9,20 +9,20 @@ public final class Hangule {
     
     private var state: HangeulState
     
-    private var source: String
+    private var source: [Character]
     
     public init() {
         self.state = HangeulState()
-        self.source = ""
+        self.source = []
     }
     
     /// 결과 문자열 얻기
     public var total: String {
-        source
+        String(source)
     }
     
     public func getTotalString() -> String {
-        return source
+        return total
     }
     
     // 글자 입력 상태 초기화
@@ -65,7 +65,7 @@ public final class Hangule {
     }
     
     public func inputLetter(_ ch: Character?){
-        // '\b' remove Key
+        // remove Key
         if (ch == nil) {
             removeAction()
             return
@@ -82,7 +82,7 @@ public final class Hangule {
             }
         }
         
-        switch state.state{
+        switch state.state {
         case .초성_Turn:
             inputInitSoundProc(ch: ch)
             break
@@ -128,28 +128,25 @@ public final class Hangule {
     }
     
     private func removeAction() {
-        if source.length <= 0 {
+        if source.count <= 0 {
             return
         }
         
         if state.state == .초성_Turn || state.isInitSound() {
             state.setStateInitSound()
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             return
         }
         
         if state.isSingleVowel() {
             state.setStateVowel()
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             source += String(state.초성코드_글자로_변환_함수())
             return
         }
         
         if state.isDoubleVowel() {
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             state.마지막_중성_모음_지우기_함수()
             source += String(state.getCompleteChar())
             return
@@ -157,14 +154,12 @@ public final class Hangule {
         
         if state.isSingleFinalConsonant() {
             state.종성_지우기_함수()
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             source += String(state.getCompleteChar())
             return
         }else if state.isFull(){
             state.마지막_종성_지우기_함수()
-            let index = source.index(source.startIndex, offsetBy: source.length - 1)
-            source = source[range: source.startIndex..<index]
+            source.removeLast()
             source += String(state.getCompleteChar())
         }
     }
