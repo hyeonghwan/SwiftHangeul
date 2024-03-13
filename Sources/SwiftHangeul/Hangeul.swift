@@ -9,7 +9,7 @@ public final class Hangule {
     
     private var state: HangeulState
     
-    private var source: [Character]
+    private(set) var source: [Character]
     
     public init() {
         self.state = HangeulState()

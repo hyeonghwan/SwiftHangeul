@@ -23,6 +23,10 @@ public final class SwiftHangeul {
         self.hanguelState = hanguelState
     }
     
+    public var length: Int {
+        hanguelState.source.count
+    }
+    
     public func input(char: Character?) {
         if let char
         {
