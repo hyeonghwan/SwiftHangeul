@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import Hangeul
+@testable import SwiftHangeul
 
 final class SwiftHangeulTests: XCTestCase {
     
@@ -35,12 +35,7 @@ final class SwiftHangeulTests: XCTestCase {
         sut.backKey()
         sut.backKey()
         let result = sut.getTotoal()
-        XCTAssertEqual("안녕하세요 만나서 반갑습니", result)
-    }
-    
-    
-    func testTimeCase() {
-        
+        XCTAssertEqual("안녕하세요 만나서 반갑습", result)
     }
 }
 

@@ -1,15 +1,24 @@
 import XCTest
-@testable import Hangeul
+@testable import SwiftHangeul
 
 final class HangeulTests: XCTestCase {
     override func setUpWithError() throws {
     }
     
     override func tearDownWithError() throws {
+        func solution(_ s:String) -> String {
+            s.components(separatedBy: [" "]).map {
+                let v = $0.first!.uppercased()
+                if $0.count == 1 { return v }
+                var str = $0
+                _ = str.removeFirst()
+                return v + String(str.map { k in String(k.lowercased())}.joined())
+            }.joined(separator: " ")
+        }
     }
     
     //UNIcodeScalar 와 UTF8
-    func testUnicode(){
+    func testUnicode() {
         let arr = HangeulFactory.shared.글자_분해_함수(input: "그러면 이것도 분해 가능 하냐?")
         let arr1 = HangeulFactory.shared.글자_분해_함수(input: "한영!")
         let one = arr.map{ String($0) }

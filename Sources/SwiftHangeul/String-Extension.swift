@@ -7,13 +7,16 @@
 
 import Foundation
 
-
-extension String{
+public extension String {
     var length: Int {
         self.utf16.count
     }
     
     static var emptyStr: String {
         ""
+    }
+    
+    subscript(range utf16: Range<String.Index>) -> String {
+         String(self[utf16])
     }
 }

@@ -128,8 +128,7 @@ public final class HangeulFactory {
     
     //자음 하나로 만들어진 한글 문자를 만드는 메서드
     public func getSingleLetter(_ value: Int) -> Character?{
-        
-        if let scalar = Unicode.Scalar(base_init_soundCode + value){
+        if let scalar = Unicode.Scalar(base_init_soundCode + value) {
         
             return Character(scalar)
         }
@@ -138,15 +137,14 @@ public final class HangeulFactory {
     
     //모음 하나로 만들어진 한글 문자를 만드는 메서드
     public func getSingleVowel(_ value: Int) -> Character?{
-        
-        if let scalar = Unicode.Scalar(base_vowel_code + value){
+        if let scalar = Unicode.Scalar(base_vowel_code + value) {
             return Character(scalar)
         }
         return nil
     }
 
     // 초성 중성 종성으로 한글자 만들기
-    public func getComplteLetter(_ init_sound: Int ,_ vowel: Int,_ final: Int) -> Character?{
+    public func getComplteLetter(_ init_sound: Int ,_ vowel: Int,_ final: Int) -> Character? {
         var tempFinalConsonant: Int = 0
         if final >= 0{
             tempFinalConsonant = final
@@ -168,7 +166,6 @@ public final class HangeulFactory {
     /// - 글자코드를 (21 * 28)로 나눈 나머지를 , 28로 나눈 몫은 중성
     /// - 글자코드값을 28로 나눈 나머지는 종성
     public func 글자_분해_함수(input string: String) -> [Character] {
-    
         var result: [Character] = []
         for scalar in string.unicodeScalars {
             let 코드 = Int(scalar.value)
@@ -194,11 +191,11 @@ public final class HangeulFactory {
                 }
             }
         }
-        
         return result
     }
+    
     // 초성 중성 종성으로 한글자 만들기
-    public func getComplteCode(_ init_sound: Int ,_ vowel: Int,_ final: Int) -> Int{
+    public func getComplteCode(_ init_sound: Int ,_ vowel: Int,_ final: Int) -> Int {
         
         var tempFinalConsonant: Int = 0
         if final >= 0{
@@ -222,7 +219,7 @@ public final class HangeulFactory {
     /// ㄹ -> , 닭, 닮, 닯, 앐, 앑, 앒, 앓
     /// ㅂ -> 앖
     /// 종성중에 이중 받침이 가능한 문자는 ㄱ,ㄴ,ㄹ,ㅂ
-    public func isDoubleFinalConsonant(_ ch: Character?) -> Bool{
+    public func isDoubleFinalConsonant(_ ch: Character?) -> Bool {
         let code = getFinalConsonantCode(ch)
         return enable_이중종성(code)
     }
@@ -253,29 +250,29 @@ extension HangeulFactory{
         return code == 1 || code == 4 || code == 8 || code == 17
     }
     
-    func isInitSound(_ ch: Character) -> Bool{
+    func isInitSound(_ ch: Character) -> Bool {
         return getInitSoundCode(ch) != -1
     }
     
-    func isVowel(_ ch: Character) -> Bool{
+    func isVowel(_ ch: Character) -> Bool {
         return getVowelCode(ch) != -1
     }
     
-    func isCharKey(_ ch: Character) -> Bool{
+    func isCharKey(_ ch: Character) -> Bool {
         return ch.isLetter
     }
     
-    func isFinalConsonant(_ ch: Character) -> Bool{
+    func isFinalConsonant(_ ch: Character) -> Bool {
         return getFinalConsonantCode(ch) != -1
     }
 }
 
 extension HangeulFactory{
-    func checkIsDoublejongSung(_ str: String) -> String{
-        if str.length <= 1{
+    func checkIsDoublejongSung(_ str: String) -> String {
+        if str.length <= 1 {
             return str
         }
-        if str.length == 2{
+        if str.length == 2 {
             switch str{
             case "ㄱㅅ":
                 return "ㄳ"
@@ -304,12 +301,12 @@ extension HangeulFactory{
         return str
     }
     
-    func checkIsDoubleVowel(_ str: String) -> String{
-        if str.length <= 1{
+    func checkIsDoubleVowel(_ str: String) -> String {
+        if str.length <= 1 {
             return str
         }
         
-        if str.length == 2{
+        if str.length == 2 {
             switch str{
             case "ㅗㅏ":
                 return "ㅘ"
