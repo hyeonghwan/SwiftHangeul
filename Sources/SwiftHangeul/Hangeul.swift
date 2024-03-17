@@ -21,13 +21,33 @@ public final class Hangule {
         String(source)
     }
     
+    public func getCharList() -> [Character] {
+        source
+    }
+    
     public func getTotalString() -> String {
         return total
+    }
+    
+    internal func clear() {
+        self.source = []
+        resetState()
     }
     
     // 글자 입력 상태 초기화
     private func resetState() {
         state.stateInit()
+    }
+    
+    
+    public func insert(_ range: NSRange,_ ch: [Character]) {
+        ch.reversed().forEach { char in
+            source.insert(char, at: range.location)
+        }
+    }
+    
+    public func remove(_ location: Int, _ length: Int) {
+        source.removeSubrange(location..<(location + length))
     }
     
     public func insert(_ ch: String?) {
