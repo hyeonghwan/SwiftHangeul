@@ -75,17 +75,10 @@
 		96B94C6E2BAEB8F10029DF62 /* HanguelDemo */ = {
 			isa = PBXGroup;
 			children = (
-				96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */,
-				96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */,
-				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
-				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
-				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
-				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
-				96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */,
-				96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */,
-				96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */,
-				96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */,
-				96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */,
+				96EB76082BD02C6200C2A570 /* Util+Type */,
+				96EB76072BD02C5500C2A570 /* Extension */,
+				96EB76062BD02C4B00C2A570 /* ViewController */,
+				96EB76052BD02C4500C2A570 /* App */,
 				96B94C752BAEB8F10029DF62 /* Main.storyboard */,
 				96B94C782BAEB8F30029DF62 /* Assets.xcassets */,
 				96B94C7A2BAEB8F30029DF62 /* LaunchScreen.storyboard */,
@@ -99,6 +92,45 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96EB76052BD02C4500C2A570 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */,
+				96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		96EB76062BD02C4B00C2A570 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
+				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
+				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
+				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		96EB76072BD02C5500C2A570 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */,
+				96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */,
+				96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		96EB76082BD02C6200C2A570 /* Util+Type */ = {
+			isa = PBXGroup;
+			children = (
+				96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */,
+				96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */,
+			);
+			path = "Util+Type";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

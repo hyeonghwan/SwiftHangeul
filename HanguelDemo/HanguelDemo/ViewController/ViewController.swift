@@ -16,12 +16,12 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate{
+extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
-extension ViewController: UITableViewDataSource{
+extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
