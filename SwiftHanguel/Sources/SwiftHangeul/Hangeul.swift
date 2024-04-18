@@ -39,10 +39,9 @@ public final class Hangule {
         state.stateInit()
     }
     
-    
-    public func insert(_ range: NSRange,_ ch: [Character]) {
+    public func insert(_ location: Int,_ ch: [Character]) {
         ch.reversed().forEach { char in
-            source.insert(char, at: range.location)
+            source.insert(char, at: location)
         }
     }
     

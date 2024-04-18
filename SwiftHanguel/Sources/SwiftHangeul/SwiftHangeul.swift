@@ -1,6 +1,6 @@
 //
 //  File 2.swift
-//  
+//
 //
 //  Created by 박형환 on 2023/08/10.
 //
@@ -53,6 +53,12 @@ public final class SwiftHangeul {
         }
     }
     
+    public func clear() {
+        hanguelState.clear()
+        caculateState.clear()
+        insertPosition.clear()
+    }
+    
     public func input(_ str: String?) {
         if let str
         {
@@ -61,18 +67,20 @@ public final class SwiftHangeul {
                 hanguelState.inputLetter(char)
             }
         }
-        else 
+        else
         {
             hanguelState.inputLetter(nil)
         }
     }
     
-    // insert(range: range, nil)
     public func insert(range: NSRange, _ str: String?) {
         delayClear()
         
         if str == nil {
             insertPosition.clear()
+            caculateState.clear()
+            hanguelState.remove(range.location, range.length)
+            return
         }
         
         if insertPosition.isNewInsertion(range) {
@@ -85,16 +93,26 @@ public final class SwiftHangeul {
         }
         
         let str = str!
-        let insertCharList = separate(input: str)
+        let separated = separate(input: str)
         
-        insertCharList.forEach { char in
+        separated.forEach { char in
             caculateState.inputLetter(char)
         }
         
-        insertPosition.length = caculateState.getCharList().count
+        let insertionCharList = caculateState.getCharList()
         
-        hanguelState.remove(insertPosition.start, insertPosition.length)
-        hanguelState.insert(range, caculateState.getCharList())
+        if range.length == 0
+        {
+            hanguelState.remove(insertPosition.start, insertPosition.length)
+            hanguelState.insert(insertPosition.start, insertionCharList)
+            insertPosition.length = insertionCharList.count
+        }
+        else
+        {
+            hanguelState.remove(insertPosition.start, range.length)
+            hanguelState.insert(insertPosition.start, insertionCharList)
+            insertPosition.clear()
+        }
     }
     
     public func separate(input: String) -> [Character] {
@@ -112,41 +130,3 @@ public final class SwiftHangeul {
 }
 
 #endif
-
-
-private struct InsertPosition {
-    var start: Int
-    var length: Int
-    
-    init(start: Int, length: Int) {
-        self.start = start
-        self.length = length
-    }
-    
-    mutating func clear() {
-        self.start = -1
-        self.length = 0
-    }
-    
-    func isNewInsertion(_ range: NSRange) -> Bool {
-        isMiddleInsertion(range) || isPreInsertion(range) || isPostInsertion(range)
-    }
-    
-    private func isMiddleInsertion(_ range: NSRange) -> Bool {
-        range.location > start && (start + length) >= (range.location + range.length)
-    }
-    
-    private func isPreInsertion(_ range: NSRange) -> Bool {
-        range.location <= start
-    }
-    
-    private func isPostInsertion(_ range: NSRange) -> Bool {
-        (range.location + range.length) > (start + length)
-    }
-}
-//hanguelFactory.charListLength
-//hanguelFactory.insert(range: range, nil)
-//hanguelFactory.charListLength ?
-//let beforeTextViewCount = hanguelFactory.charListLength
-//hanguelFactory.insert(range: range, text)
-//beforeTextViewCount == hanguelFactory.charListLength ?

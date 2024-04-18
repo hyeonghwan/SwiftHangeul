@@ -38,6 +38,19 @@ final class SwiftHangeulTests: XCTestCase {
         XCTAssertEqual("안녕하세요 만나서 반갑습", result)
     }
     
+    func testInsert() {
+        let str = "모든 국민은 자기의 행위가 아닌 친족의 행위로 인하여 불이익한 처우를 받지 아니한다. 국회의 회의는 공개한다."
+        sut.input(str)
+        sut.insert(range: NSRange(location: 3, length: 3), "백성은")
+        sut.insert(range: NSRange(location: 7, length: 3), "자신의")
+        sut.insert(range: NSRange(location: 18, length: 11), "친족의 행위로 인해")
+        sut.insert(range: NSRange(location: 29, length: 4), "불이익의")
+        let result = "모든 백성은 자신의 행위가 아닌 친족의 행위로 인해 불이익의 처우를 받지 아니한다. 국회의 회의는 공개한다."
+        let typing = "모든 백성은 자신의 행위가 아닌 친족의 행위로 인해 불이익의 처우를 받지 아니한다. 국회의 회의는 공개한다."
+        XCTAssertEqual(result, sut.getTotoal())
+        XCTAssertEqual(typing, sut.getTotoal())
+    }
+    
     func testEmoji() {
         let ch1: [Character] = ["⚠️"]
         let ch2: [Character] = ["💡"]

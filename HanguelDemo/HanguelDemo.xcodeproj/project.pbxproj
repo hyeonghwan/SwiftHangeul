@@ -18,6 +18,10 @@
 		96B94C892BAEBDF40029DF62 /* SwiftHangeul in Frameworks */ = {isa = PBXBuildFile; productRef = 96B94C882BAEBDF40029DF62 /* SwiftHangeul */; };
 		96B94C8B2BAED5180029DF62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C8A2BAED5180029DF62 /* ViewController.swift */; };
 		96B94C8D2BAED53E0029DF62 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */; };
+		96BB32612BC5AEC900B1E133 /* UIView-Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */; };
+		96BB32632BC5AF2C00B1E133 /* Collection-safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */; };
+		96BB32652BC5AF3800B1E133 /* AnimateTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */; };
+		96BB32672BC5BF7C00B1E133 /* AnimateTextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateLabel.swift; sourceTree = "<group>"; };
 		96B94C8A2BAED5180029DF62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Gesture.swift"; sourceTree = "<group>"; };
+		96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-safe.swift"; sourceTree = "<group>"; };
+		96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTiming.swift; sourceTree = "<group>"; };
+		96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTextType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,13 +75,10 @@
 		96B94C6E2BAEB8F10029DF62 /* HanguelDemo */ = {
 			isa = PBXGroup;
 			children = (
-				96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */,
-				96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */,
-				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
-				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
-				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
-				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
-				96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */,
+				96EB76082BD02C6200C2A570 /* Util+Type */,
+				96EB76072BD02C5500C2A570 /* Extension */,
+				96EB76062BD02C4B00C2A570 /* ViewController */,
+				96EB76052BD02C4500C2A570 /* App */,
 				96B94C752BAEB8F10029DF62 /* Main.storyboard */,
 				96B94C782BAEB8F30029DF62 /* Assets.xcassets */,
 				96B94C7A2BAEB8F30029DF62 /* LaunchScreen.storyboard */,
@@ -87,6 +92,45 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96EB76052BD02C4500C2A570 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */,
+				96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		96EB76062BD02C4B00C2A570 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
+				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
+				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
+				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		96EB76072BD02C5500C2A570 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */,
+				96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */,
+				96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		96EB76082BD02C6200C2A570 /* Util+Type */ = {
+			isa = PBXGroup;
+			children = (
+				96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */,
+				96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */,
+			);
+			path = "Util+Type";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,9 +208,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B94C8B2BAED5180029DF62 /* ViewController.swift in Sources */,
+				96BB32652BC5AF3800B1E133 /* AnimateTiming.swift in Sources */,
 				96B94C742BAEB8F10029DF62 /* AnimateTextViewController.swift in Sources */,
 				96B94C842BAEBA8A0029DF62 /* UIControl-Combine.swift in Sources */,
 				96B94C862BAEBD5A0029DF62 /* AnimateLabel.swift in Sources */,
+				96BB32632BC5AF2C00B1E133 /* Collection-safe.swift in Sources */,
+				96BB32672BC5BF7C00B1E133 /* AnimateTextType.swift in Sources */,
+				96BB32612BC5AEC900B1E133 /* UIView-Gesture.swift in Sources */,
 				96B94C702BAEB8F10029DF62 /* AppDelegate.swift in Sources */,
 				96B94C8D2BAED53E0029DF62 /* TableViewCell.swift in Sources */,
 				96B94C722BAEB8F10029DF62 /* SceneDelegate.swift in Sources */,
