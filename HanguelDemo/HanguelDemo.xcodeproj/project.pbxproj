@@ -10,18 +10,18 @@
 		96B94C702BAEB8F10029DF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */; };
 		96B94C722BAEB8F10029DF62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */; };
 		96B94C742BAEB8F10029DF62 /* AnimateTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */; };
-		96B94C772BAEB8F10029DF62 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 96B94C762BAEB8F10029DF62 /* Base */; };
 		96B94C792BAEB8F30029DF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B94C782BAEB8F30029DF62 /* Assets.xcassets */; };
 		96B94C7C2BAEB8F30029DF62 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 96B94C7B2BAEB8F30029DF62 /* Base */; };
 		96B94C842BAEBA8A0029DF62 /* UIControl-Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */; };
-		96B94C862BAEBD5A0029DF62 /* AnimateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */; };
 		96B94C892BAEBDF40029DF62 /* SwiftHangeul in Frameworks */ = {isa = PBXBuildFile; productRef = 96B94C882BAEBDF40029DF62 /* SwiftHangeul */; };
-		96B94C8B2BAED5180029DF62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C8A2BAED5180029DF62 /* ViewController.swift */; };
-		96B94C8D2BAED53E0029DF62 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */; };
 		96BB32612BC5AEC900B1E133 /* UIView-Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */; };
 		96BB32632BC5AF2C00B1E133 /* Collection-safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */; };
 		96BB32652BC5AF3800B1E133 /* AnimateTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */; };
 		96BB32672BC5BF7C00B1E133 /* AnimateTextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */; };
+		96EB760C2BD02EC700C2A570 /* AnimateDrawingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB760B2BD02EC700C2A570 /* AnimateDrawingController.swift */; };
+		96EB760F2BD030D000C2A570 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB760E2BD030D000C2A570 /* TableViewCell.swift */; };
+		96EB76122BD0311C00C2A570 /* AnimateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB76102BD0311C00C2A570 /* AnimateLabel.swift */; };
+		96EB76132BD0311C00C2A570 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB76112BD0311C00C2A570 /* AnimateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,18 +29,18 @@
 		96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTextViewController.swift; sourceTree = "<group>"; };
-		96B94C762BAEB8F10029DF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96B94C782BAEB8F30029DF62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96B94C7B2BAEB8F30029DF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96B94C7D2BAEB8F30029DF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96B94C832BAEBA8A0029DF62 /* UIControl-Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl-Combine.swift"; sourceTree = "<group>"; };
-		96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateLabel.swift; sourceTree = "<group>"; };
-		96B94C8A2BAED5180029DF62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		96BB32602BC5AEC900B1E133 /* UIView-Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Gesture.swift"; sourceTree = "<group>"; };
 		96BB32622BC5AF2C00B1E133 /* Collection-safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection-safe.swift"; sourceTree = "<group>"; };
 		96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTiming.swift; sourceTree = "<group>"; };
 		96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTextType.swift; sourceTree = "<group>"; };
+		96EB760B2BD02EC700C2A570 /* AnimateDrawingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateDrawingController.swift; sourceTree = "<group>"; };
+		96EB760E2BD030D000C2A570 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		96EB76102BD0311C00C2A570 /* AnimateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateLabel.swift; sourceTree = "<group>"; };
+		96EB76112BD0311C00C2A570 /* AnimateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +75,11 @@
 		96B94C6E2BAEB8F10029DF62 /* HanguelDemo */ = {
 			isa = PBXGroup;
 			children = (
+				96EB76052BD02C4500C2A570 /* App */,
 				96EB76082BD02C6200C2A570 /* Util+Type */,
 				96EB76072BD02C5500C2A570 /* Extension */,
 				96EB76062BD02C4B00C2A570 /* ViewController */,
-				96EB76052BD02C4500C2A570 /* App */,
-				96B94C752BAEB8F10029DF62 /* Main.storyboard */,
+				96EB760D2BD0300600C2A570 /* View */,
 				96B94C782BAEB8F30029DF62 /* Assets.xcassets */,
 				96B94C7A2BAEB8F30029DF62 /* LaunchScreen.storyboard */,
 				96B94C7D2BAEB8F30029DF62 /* Info.plist */,
@@ -106,10 +106,8 @@
 		96EB76062BD02C4B00C2A570 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
-				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
 				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
-				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
+				96EB760B2BD02EC700C2A570 /* AnimateDrawingController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -131,6 +129,16 @@
 				96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */,
 			);
 			path = "Util+Type";
+			sourceTree = "<group>";
+		};
+		96EB760D2BD0300600C2A570 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96EB76102BD0311C00C2A570 /* AnimateLabel.swift */,
+				96EB76112BD0311C00C2A570 /* AnimateView.swift */,
+				96EB760E2BD030D000C2A570 /* TableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +204,6 @@
 			files = (
 				96B94C792BAEB8F30029DF62 /* Assets.xcassets in Resources */,
 				96B94C7C2BAEB8F30029DF62 /* Base in Resources */,
-				96B94C772BAEB8F10029DF62 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,16 +214,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B94C8B2BAED5180029DF62 /* ViewController.swift in Sources */,
+				96EB76122BD0311C00C2A570 /* AnimateLabel.swift in Sources */,
+				96EB760F2BD030D000C2A570 /* TableViewCell.swift in Sources */,
 				96BB32652BC5AF3800B1E133 /* AnimateTiming.swift in Sources */,
 				96B94C742BAEB8F10029DF62 /* AnimateTextViewController.swift in Sources */,
+				96EB76132BD0311C00C2A570 /* AnimateView.swift in Sources */,
 				96B94C842BAEBA8A0029DF62 /* UIControl-Combine.swift in Sources */,
-				96B94C862BAEBD5A0029DF62 /* AnimateLabel.swift in Sources */,
+				96EB760C2BD02EC700C2A570 /* AnimateDrawingController.swift in Sources */,
 				96BB32632BC5AF2C00B1E133 /* Collection-safe.swift in Sources */,
 				96BB32672BC5BF7C00B1E133 /* AnimateTextType.swift in Sources */,
 				96BB32612BC5AEC900B1E133 /* UIView-Gesture.swift in Sources */,
 				96B94C702BAEB8F10029DF62 /* AppDelegate.swift in Sources */,
-				96B94C8D2BAED53E0029DF62 /* TableViewCell.swift in Sources */,
 				96B94C722BAEB8F10029DF62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,14 +232,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		96B94C752BAEB8F10029DF62 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				96B94C762BAEB8F10029DF62 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		96B94C7A2BAEB8F30029DF62 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -374,9 +374,6 @@
 				INFOPLIST_FILE = HanguelDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -403,9 +400,6 @@
 				INFOPLIST_FILE = HanguelDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
