@@ -13,7 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windoScene)
         window.makeKeyAndVisible()
         
-        let viewController = AnimateTextViewController()
+        // let viewController = AnimateTextViewController()
+        let viewController = ViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
         window.rootViewController = navigationController
