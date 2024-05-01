@@ -57,6 +57,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9673EF3C2BE22A85007436D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+                96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
+                96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
+                9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */,
+                96B94C8A2BAED5180029DF62 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		96B94C632BAEB8F10029DF62 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +88,7 @@
 		96B94C6E2BAEB8F10029DF62 /* HanguelDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9673EF3C2BE22A85007436D7 /* View */,
 				96EB76082BD02C6200C2A570 /* Util+Type */,
 				96EB76072BD02C5500C2A570 /* Extension */,
 				96EB76062BD02C4B00C2A570 /* ViewController */,
@@ -107,11 +119,7 @@
 		96EB76062BD02C4B00C2A570 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
-				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
-				9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */,
 				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
-				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
