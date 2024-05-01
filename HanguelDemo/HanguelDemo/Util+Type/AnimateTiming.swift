@@ -81,7 +81,7 @@ public class AnimateTextTiming {
     public func gestureBinding() {
         labels.enumerated().forEach { value in
             if value.element.isUserInteractionEnabled {
-                value.element.gesture()
+                value.element.label?.gesture()
                     .sink(receiveValue: { tap in
                         Task { [weak self] in
                             guard let self else { return }
