@@ -1,0 +1,15 @@
+{
+  "originHash" : "1c2d8c20485cb0e45a3cfa078918808e90b4b80287d11ab91cef22f1d4a24429",
+  "pins" : [
+    {
+      "identity" : "swifthangeul",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyeonghwan/SwiftHangeul",
+      "state" : {
+        "revision" : "f745115bd74512b1bc1119bfe91ed04936644394",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 3
+}
