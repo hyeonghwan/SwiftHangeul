@@ -10,7 +10,22 @@ public enum AnimateHangeul {
     case finish
 }
 
-open class AnimateTextLabel: UILabel, AnimateTextType {
+open class AnimateTextLabel: AnimateTextType {
+    public var _text: String? {
+        get { self.label?.text
+        }
+        set {
+            self.label?.text = newValue
+            self.label?.superview?.layoutIfNeeded()
+        }
+    }
+    
+    public var isUserInteractionEnabled: Bool {
+        get { label?.isUserInteractionEnabled ?? false }
+        set { label?.isUserInteractionEnabled = newValue }
+    }
+    
+    weak var label: UILabel?
     public var id: UUID = UUID()
     open var seconds: TimeInterval!
     open var animateText: String!
@@ -20,29 +35,24 @@ open class AnimateTextLabel: UILabel, AnimateTextType {
     public var timerSubscriptions: AnyCancellable?
     public var animateTiming = PassthroughSubject<AnimateHangeul, Never>()
     
-    public convenience init(frame: CGRect = .zero,
-                            seconds: TimeInterval = 0.05,
-                            text: String,
-                            gesture enable: Bool = true)
+    deinit { timerSubscriptions = nil }
+    
+    public init(seconds: TimeInterval = 0.05,
+                text: String,
+                gesture enable: Bool = true)
     {
-        self.init(frame: frame)
         self.seconds = seconds
         self.animateText = text
         self.defaultText = text
         applyAttribute(enable: enable)
     }
     
-    private override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    public required init?(coder: NSCoder) {
-        fatalError("required init fatalError")
+    public func setLabel(_ label: UILabel) {
+        self.label = label
     }
     
     open func applyAttribute(enable: Bool) {
-        self.numberOfLines = 0
-        self.isUserInteractionEnabled = enable
+        self.label?.isUserInteractionEnabled = enable
     }
     
     public func cacheClear() {
@@ -51,6 +61,6 @@ open class AnimateTextLabel: UILabel, AnimateTextType {
     
     public func clear() {
         swiftHanguel.clear()
-        self.text = ""
+        self._text = ""
     }
 }
