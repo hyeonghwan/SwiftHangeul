@@ -5,81 +5,56 @@ import Combine
 import SwiftHangeul
 import CoreText
 
+let text1 = """
+1. View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다
+"""
+
 open class AnimateTextViewController: UIViewController {
     
-    let text1 = """
-    1. View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다 1.View 의 레이아웃을 적용하고 이미지를 디코딩 후 2.Commit Transaction 으로 부터 받은 Package를 분석하고 deserialize하여 rendering tree에 보낸다
-    """
-    
     private var animateTextViewTiming: AnimateTextViewTiming!
-    private var animateTextTiming: AnimateTextTiming!
-    private var animateTiming: AnimateViewTiming!
     
-    private let stackView = UIStackView()
     private let uilabel = UILabel()
     private let refreshButton = UIButton()
-    private lazy var animateView = AnimateView.init(text: text1)
     private lazy var uiTextView = AnimateTextView.init(text: text1)
     private var subscriptions = Set<AnyCancellable>()
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         applyAttributes()
         addAutoLayout()
         binding()
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Task { await animateTextViewTiming.startAnimate(0) }
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.animateTextViewTiming.reset()
     }
     
     private func binding() {
         refreshButton.tapEvent()
             .sink(receiveValue: { [weak self] _ in
-                // self?.animateTextViewTiming.descendAnimation()
-                Task {
-                    await self?.animateTextViewTiming.startAnimate(0)
-                    // await self?.animateTiming.startAnimate(0)
-                }
+                Task { await self?.animateTextViewTiming.startAnimate(0) }
             }).store(in: &subscriptions)
     }
     
     private func applyAttributes() {
-        uiTextView.textColor = .white
-        uiTextView.backgroundColor = .black
+        uiTextView.textColor = .label
+        uiTextView.backgroundColor = .systemBackground
         uiTextView.font = UIFont.boldSystemFont(ofSize: 16)
-        uilabel.textColor = .white
+        uilabel.textColor = .label
         uilabel.font = UIFont.boldSystemFont(ofSize: 16)
         
         animateTextViewTiming = AnimateTextViewTiming.init(uiTextView)
-        animateTextTiming = AnimateTextTiming(labels: [])
-        animateTiming = AnimateViewTiming(animateView)
         
-        let label = AnimateTextLabel.init(text: "안녕하십니까 *** 이라고 합니다.")
-        label.numberOfLines = 0
-        let label2 = AnimateTextLabel.init(text: "\(text1)")
-        let label3 = AnimateTextLabel.init(text: "ㅋㅋㅋㅇㄹㅁㄴㅇㄹ.")
-        let label4 = AnimateTextLabel.init(text: "테스트 메시지 입니다..")
+        self.view.backgroundColor = .systemBackground
         
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        animateTextTiming.append(label: label2)
-
-        
-        animateTextTiming.gestureBinding()
-        self.view.backgroundColor = .black
-        animateTextTiming.labels.forEach {
-            $0.font = .systemFont(ofSize: 16)
-            $0.textColor = .black
-            $0.minimumScaleFactor = 0.6
-            $0.adjustsFontSizeToFitWidth = true
-        }
         
         uilabel.text = text1
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        uiTextView.layer.borderColor = UIColor.white.cgColor
+        uiTextView.layer.borderColor = UIColor.label.cgColor
         uiTextView.layer.borderWidth = 1
         uiTextView.layer.cornerRadius = 6
     }
@@ -87,16 +62,9 @@ open class AnimateTextViewController: UIViewController {
     private func addAutoLayout() {
         view.addSubview(uiTextView)
         view.addSubview(refreshButton)
-        view.addSubview(uilabel)
         
-        animateTextTiming.labels.forEach {
-            stackView.addArrangedSubview($0)
-        }
-        uilabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         uiTextView.translatesAutoresizingMaskIntoConstraints = false
-        
         refreshButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         refreshButton.tintColor = .systemPink
         
@@ -105,8 +73,6 @@ open class AnimateTextViewController: UIViewController {
             refreshButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             refreshButton.widthAnchor.constraint(equalToConstant: 44),
             refreshButton.heightAnchor.constraint(equalToConstant: 44),
-            uilabel.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 12),
-            uilabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
             
             uiTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
             uiTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
@@ -117,6 +83,7 @@ open class AnimateTextViewController: UIViewController {
 }
 
 public class AnimateView: UIView, AnimateTextType {
+    public var _text: String? 
     
     public var id: UUID = UUID()
     open var seconds: TimeInterval!
@@ -150,12 +117,12 @@ public class AnimateView: UIView, AnimateTextType {
             let font1 = UIFont.boldSystemFont(ofSize: 16)
             self.splitStrings = animateText.components(separatedBy: " ").map { String($0) }
             caculateTextSize(
-                attributes: [.foregroundColor : UIColor.white.cgColor,.font : font1]
+                attributes: [.foregroundColor : UIColor.label.cgColor,.font : font1]
             )
             lineWidthHeighCaculate()
         }
         
-        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderColor = UIColor.label.cgColor
         self.layer.borderWidth = 1
         self.layer.backgroundColor = UIColor.clear.cgColor
         self.layer.cornerRadius = 12
@@ -219,7 +186,7 @@ public class AnimateView: UIView, AnimateTextType {
     
     lazy var defaultTextheight: CGFloat = ("안녕" as NSString).size(withAttributes: attributes).height
     let font1 = UIFont.boldSystemFont(ofSize: 16)
-    lazy var attributes: [NSAttributedString.Key: Any] = [.foregroundColor : UIColor.white.cgColor, .font : font1]
+    lazy var attributes: [NSAttributedString.Key: Any] = [.foregroundColor : UIColor.label.cgColor, .font : font1]
     
     public override func draw(_ layer: CALayer, in ctx: CGContext) {
         let currentCnt = resultAnimateText[currentIndex].count + acnt
