@@ -36,11 +36,19 @@ public extension AnimateTextType {
             .append([AnimateHangeul.finish])
     }
     
+    func animateStopAndPlay(current string: String) -> AnyPublisher<AnimateHangeul, Never> {
+        cancel()
+        let sequence = separateTiming(string: string)
+        return animateText(sequence: sequence)
+    }
+    
     func animateTextStart() -> AnyPublisher<AnimateHangeul, Never> {
-        swiftHanguel.clear()
-        
+        cancel()
         let sequence = separateTiming()
-        
+        return animateText(sequence: sequence)
+    }
+    
+    private func animateText(sequence: Publishers.Sequence<[AnimateHangeul], Never>) -> AnyPublisher<AnimateHangeul, Never> {
         let timer
         = Timer
             .publish(every: seconds, on: .main, in: .default)
