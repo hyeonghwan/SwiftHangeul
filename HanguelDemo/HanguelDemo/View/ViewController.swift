@@ -7,6 +7,22 @@
 
 import UIKit
 
+enum AnimationViewType: CaseIterable {
+    case view
+    case label
+    case textView
+    
+    var description: String {
+        switch self {
+        case .view:
+            return "1. View Animation"
+        case .label:
+            return "2. Label Animation"
+        case .textView:
+            return "3. UITextView Animation"
+        }
+    }
+}
 
 final class ViewController: UIViewController {
     
