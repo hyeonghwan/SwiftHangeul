@@ -10,6 +10,10 @@ import Combine
 import UIKit
 
 open class AnimateTextView: UITextView, AnimateTextType {
+    public var _text: String? {
+        get { self.text }
+        set { self.text = newValue }
+    }
     public var id: UUID = UUID()
     open var seconds: TimeInterval!
     open var animateText: String!
@@ -20,7 +24,7 @@ open class AnimateTextView: UITextView, AnimateTextType {
     public var animateTiming = PassthroughSubject<AnimateHangeul, Never>()
     
     public convenience init(frame: CGRect = .zero,
-                            seconds: TimeInterval = 0.05,
+                            seconds: TimeInterval = 0.1,
                             text: String  = "안녕하세요 저는 박형환 이라고 합니다.",
                             gesture enable: Bool = true)
     {
@@ -40,10 +44,11 @@ open class AnimateTextView: UITextView, AnimateTextType {
     }
     
     open func applyAttribute(enable: Bool) {
-        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderColor = UIColor.label.cgColor
         self.layer.borderWidth = 1
         self.isUserInteractionEnabled = enable
         self.isEditable = false
+        self.isSelectable = false
     }
     
     public func cacheClear() {
