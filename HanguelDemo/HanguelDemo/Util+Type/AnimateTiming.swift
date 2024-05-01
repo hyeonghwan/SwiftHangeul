@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+
 public class AnimateViewTiming {
     private weak var view: AnimateView!
     public var subscriptions = Set<AnyCancellable>()
@@ -16,6 +17,9 @@ public class AnimateViewTiming {
     public init(_ textView: AnimateView) {
         self.view = textView
     }
+    
+    deinit { reset() }
+    public func reset() { textViewAnimating?.cancel() }
     
     public func replace(textView: AnimateView) {
         self.view = textView
@@ -37,45 +41,54 @@ public class AnimateViewTiming {
 }
 
 
-public class AnimateTextViewTiming {
+public class AnimateTextViewTiming: AnimateTiming {
+    
+    public var labels: [AnimateTextView]
+    public var allTaskID: UUID = UUID()
+    public var taskList: [UUID : Task<Void, Never>] = [:]
+    
+    public typealias View = AnimateTextView
+    
     private weak var textView: AnimateTextView!
     public var subscriptions = Set<AnyCancellable>()
     var textViewAnimating: Task<Void, Never>?
     
-    public init(_ textView: AnimateTextView) {
-        self.textView = textView
+    public init(_ textView: AnimateTextView...) {
+        self.labels = []
+        self.textView = textView.first
+        defer {
+            textView.forEach { self.labels.append($0) }
+        }
     }
     
     public func replace(textView: AnimateTextView) {
         self.textView = textView
     }
     
-    @MainActor
-    public func startAnimate(_ offset: Int) async {
-        textView.text = ""
+    deinit { reset() }
+    
+    public func reset() {
         textViewAnimating?.cancel()
-        textViewAnimating = Task {
-            let values = textView.animateTextStart().values
-            for await _ in values {
-                let text = textView.swiftHanguel.getTotoal()
-                textView.text = text
-            }
-        }
         textView.cacheClear()
     }
-    
 }
 
-public class AnimateTextTiming {
-    public var labels: [AnimateTextLabel]
-    public var ids: [UUID]
-    public var taskList: [UUID: Task<Void, Never>?] = [:]
+
+public class AnimateTextTiming: AnimateTiming {
+    
+    public var labels:      [AnimateTextLabel]
+    public var taskList:    [UUID: Task<Void, Never>] = [:]
     public var subscriptions = Set<AnyCancellable>()
-    public var allTaskID = UUID()
+    public var allTaskID     = UUID()
     
     public init(labels: [AnimateTextLabel]) {
         self.labels = labels
-        self.ids = labels.map(\.id)
+    }
+    
+    deinit {
+        labels.forEach { $0.clear() }
+        reset()
+    }
     
     public func longPressGestureBinding() {
         labels.enumerated().forEach { value in
