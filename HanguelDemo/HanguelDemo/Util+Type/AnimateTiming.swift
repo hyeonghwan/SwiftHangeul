@@ -76,6 +76,25 @@ public class AnimateTextTiming {
     public init(labels: [AnimateTextLabel]) {
         self.labels = labels
         self.ids = labels.map(\.id)
+    
+    public func longPressGestureBinding() {
+        labels.enumerated().forEach { value in
+            if value.element.isUserInteractionEnabled {
+                value.element.label?.gesture(.longPress(.init()))
+                    .map { $0.get().state }
+                    .sink(receiveValue: { [weak self] state in
+                        guard let self else { return }
+                        switch state {
+                        case .began:
+                            self.cancel(id: value.element.id)
+                        case .ended:
+                            Task { await self.restart(id: value.element.id) }
+                        default: break
+                        }
+                    })
+                    .store(in: &subscriptions)
+            }
+        }
     }
     
     public func gestureBinding() {
