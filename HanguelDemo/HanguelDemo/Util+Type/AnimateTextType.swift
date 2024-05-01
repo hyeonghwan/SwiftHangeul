@@ -10,21 +10,42 @@ import Combine
 import SwiftHangeul
 
 public protocol AnimateTextType: AnyObject {
-    var id: UUID { get set }
-    var seconds: TimeInterval! { get set }
-    var animateText: String! { get set }
-    var defaultText: String! { get set }
-    var swiftHanguel: SwiftHangeul { get set }
+    var id:                 UUID            { get set }
+    var _text:              String?         { get set }
+    var seconds:            TimeInterval!   { get set }
+    var animateText:        String!         { get set }
+    var defaultText:        String!         { get set }
+    var swiftHanguel:       SwiftHangeul    { get set }
     var timerSubscriptions: AnyCancellable? { get set }
+    
+    func cacheClear()
+    func clear()
+    func cancel()
+    func separateTiming(string: String)             -> Publishers.Sequence<[AnimateHangeul], Never>
+    func separateTiming()                           -> Publishers.Sequence<[AnimateHangeul], Never>
+    func animateStopAndPlay(current string: String) -> AnyPublisher<AnimateHangeul, Never>
+    func animateTextStart()                         -> AnyPublisher<AnimateHangeul, Never>
 }
 
 public extension AnimateTextType {
     
     var gestureSubscription: AnyCancellable? { nil }
-    
+    var _text: String? { "" }
+    func cacheClear() { }
+    func clear() { }
     func cancel() {
         timerSubscriptions?.cancel()
         swiftHanguel.clear()
+    }
+    
+    func separateTiming(string: String) -> Publishers.Sequence<[AnimateHangeul], Never> {
+        let stringIndex = string.index(before: string.endIndex)
+        let values = defaultText.suffix(from: stringIndex)
+        return swiftHanguel
+            .separate(input: String(values))
+            .publisher
+            .map { AnimateHangeul.progress($0) }
+            .append([AnimateHangeul.finish])
     }
     
     func separateTiming() -> Publishers.Sequence<[AnimateHangeul], Never> {
