@@ -6,6 +6,7 @@
 //
 
 import SwiftHangeul
+import Combine
 import UIKit
 
 open class AnimateTextView: UITextView, AnimateTextType {
