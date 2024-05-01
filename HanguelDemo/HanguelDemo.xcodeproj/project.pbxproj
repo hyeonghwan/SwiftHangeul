@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		9673EF392BE226A1007436D7 /* SwiftHangeul in Frameworks */ = {isa = PBXBuildFile; productRef = 9673EF382BE226A1007436D7 /* SwiftHangeul */; };
 		9673EF3B2BE228D2007436D7 /* AnimateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */; };
+		9673EF3E2BE23334007436D7 /* AnimateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF3D2BE23334007436D7 /* AnimateViewController.swift */; };
+		9673EF402BE2333F007436D7 /* AnimateLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF3F2BE2333F007436D7 /* AnimateLabelController.swift */; };
+		9673EF422BE23395007436D7 /* CoreAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF412BE23395007436D7 /* CoreAnimationController.swift */; };
+		9673EF442BE25293007436D7 /* AnimateTiming-Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF432BE25293007436D7 /* AnimateTiming-Protocol.swift */; };
+		9673EF462BE257CE007436D7 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673EF452BE257CE007436D7 /* PreviewCell.swift */; };
 		96B94C702BAEB8F10029DF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */; };
 		96B94C722BAEB8F10029DF62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */; };
 		96B94C742BAEB8F10029DF62 /* AnimateTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */; };
@@ -27,6 +32,11 @@
 
 /* Begin PBXFileReference section */
 		9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTextView.swift; sourceTree = "<group>"; };
+		9673EF3D2BE23334007436D7 /* AnimateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateViewController.swift; sourceTree = "<group>"; };
+		9673EF3F2BE2333F007436D7 /* AnimateLabelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateLabelController.swift; sourceTree = "<group>"; };
+		9673EF412BE23395007436D7 /* CoreAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimationController.swift; sourceTree = "<group>"; };
+		9673EF432BE25293007436D7 /* AnimateTiming-Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimateTiming-Protocol.swift"; sourceTree = "<group>"; };
+		9673EF452BE257CE007436D7 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		96B94C6C2BAEB8F10029DF62 /* HanguelDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanguelDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B94C6F2BAEB8F10029DF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96B94C712BAEB8F10029DF62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,10 +70,11 @@
 		9673EF3C2BE22A85007436D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-                96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
-                96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
-                9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */,
-                96B94C8A2BAED5180029DF62 /* ViewController.swift */,
+				96B94C8C2BAED53E0029DF62 /* TableViewCell.swift */,
+				9673EF452BE257CE007436D7 /* PreviewCell.swift */,
+				96B94C852BAEBD5A0029DF62 /* AnimateLabel.swift */,
+				9673EF3A2BE228D2007436D7 /* AnimateTextView.swift */,
+				96B94C8A2BAED5180029DF62 /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,6 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				96B94C732BAEB8F10029DF62 /* AnimateTextViewController.swift */,
+				9673EF3D2BE23334007436D7 /* AnimateViewController.swift */,
+				9673EF3F2BE2333F007436D7 /* AnimateLabelController.swift */,
+				9673EF412BE23395007436D7 /* CoreAnimationController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -138,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				96BB32642BC5AF3800B1E133 /* AnimateTiming.swift */,
+				9673EF432BE25293007436D7 /* AnimateTiming-Protocol.swift */,
 				96BB32662BC5BF7C00B1E133 /* AnimateTextType.swift */,
 			);
 			path = "Util+Type";
@@ -220,7 +235,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9673EF402BE2333F007436D7 /* AnimateLabelController.swift in Sources */,
 				96B94C8B2BAED5180029DF62 /* ViewController.swift in Sources */,
+				9673EF462BE257CE007436D7 /* PreviewCell.swift in Sources */,
 				96BB32652BC5AF3800B1E133 /* AnimateTiming.swift in Sources */,
 				96B94C742BAEB8F10029DF62 /* AnimateTextViewController.swift in Sources */,
 				96B94C842BAEBA8A0029DF62 /* UIControl-Combine.swift in Sources */,
@@ -230,8 +247,11 @@
 				9673EF3B2BE228D2007436D7 /* AnimateTextView.swift in Sources */,
 				96BB32612BC5AEC900B1E133 /* UIView-Gesture.swift in Sources */,
 				96B94C702BAEB8F10029DF62 /* AppDelegate.swift in Sources */,
+				9673EF3E2BE23334007436D7 /* AnimateViewController.swift in Sources */,
 				96B94C8D2BAED53E0029DF62 /* TableViewCell.swift in Sources */,
+				9673EF442BE25293007436D7 /* AnimateTiming-Protocol.swift in Sources */,
 				96B94C722BAEB8F10029DF62 /* SceneDelegate.swift in Sources */,
+				9673EF422BE23395007436D7 /* CoreAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
