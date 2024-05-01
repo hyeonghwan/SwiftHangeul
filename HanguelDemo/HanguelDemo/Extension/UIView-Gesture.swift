@@ -74,6 +74,7 @@ enum AnimateTexts {
     enum GestureType {
         case tap(UITapGestureRecognizer = .init())
         case longPress(UILongPressGestureRecognizer = .init())
+        
         func get() -> UIGestureRecognizer {
             switch self {
             case let .tap(tapGesture):
